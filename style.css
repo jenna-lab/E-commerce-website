@@ -33,7 +33,6 @@
 .header {
     display: flex;
     justify-content: space-around;
-    width: 40%;
     font-size: 24px;
 }
 
@@ -43,7 +42,6 @@
 }
 
 .nav-ul{
-    width: 60%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -59,13 +57,16 @@
     font-size: 20px;
 }
 
+.navbar a {
+    text-decoration: none; 
+    color: black; 
+}
+
 @media only screen and (max-width: 700px) {
      .navs ul {
         display: none; 
     }
 
-    .header {
-        margin-left: auto; 
-    }
+
   
 }
