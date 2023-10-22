@@ -1,20 +1,4 @@
 var apiUrl = "https://fakestoreapi.com/products";
-// function displaySingleProduct(product: Product): void {
-//   const productContainer = document.getElementById("product-container");
-//   if (!productContainer) return;
-//   productContainer.innerHTML = "";
-//   const productDiv = document.createElement("div");
-//   productDiv.classList.add("product");
-//   productDiv.innerHTML = `
-//     <img src="${product.image}" alt="${product.title}" />
-//     <h3>${product.title}</h3>
-//     <p>Category: ${product.category}</p>
-//     <p>Price: $${product.price}</p>
-//     <p>Description: ${product.description}</p>
-//     <p>Rating: ${product.rating.rate} (${product.rating.count} reviews)</p>
-//   `;
-//   productContainer.appendChild(productDiv);
-// }
 function displaySingleProduct(product) {
     var productContainer = document.getElementById("product-container");
     if (!productContainer)
