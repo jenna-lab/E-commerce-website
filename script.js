@@ -4,28 +4,25 @@ function displaySingleProduct(product) {
     if (!productContainer)
         return;
     productContainer.innerHTML = "";
-    // Loading the product.html content
     fetch("product.html")
         .then(function (response) { return response.text(); })
         .then(function (html) {
         productContainer.innerHTML = html;
-        // Populating the product details
         var productTitleElements = document.querySelectorAll("#productTitle");
         productTitleElements.forEach(function (element) {
-            // element.innerText = product.title;
-            //  element.style.textDecoration = "none"; 
+            element.innerHTML = product.title;
         });
         var productCategoryElement = document.getElementById("productCategory");
         if (productCategoryElement) {
-            productCategoryElement.innerText = "Category: ".concat(product.category);
+            productCategoryElement.innerHTML = "Category: ".concat(product.category);
         }
         var productPriceElements = document.querySelectorAll("#productPrice");
         productPriceElements.forEach(function (element) {
-            // element.innerText = `$${product.price}`;
+            element.innerHTML = "$".concat(product.price);
         });
         var productDescriptionElements = document.querySelectorAll("#productDescription");
         productDescriptionElements.forEach(function (element) {
-            // element.innerText = product.description;
+            element.innerHTML = product.description;
         });
         var productRatingElement = document.getElementById("productRating");
         if (productRatingElement) {
@@ -53,13 +50,16 @@ function displayAllProducts(products) {
     products.forEach(function (product) {
         var productDiv = document.createElement("div");
         productDiv.classList.add("product");
-        productDiv.innerHTML = "\n      <img src=\"".concat(product.image, "\" alt=\"").concat(product.title, "\" />\n      <h3>").concat(product.title, "</h3>\n      <p>Category: ").concat(product.category, "</p>\n      <p>Price: $").concat(product.price, "</p>\n      // <button onclick=\"addToCart(").concat(product.id, ")\">Add to Cart</button>\n\n    ");
+        productDiv.innerHTML = "\n      <img src=\"".concat(product.image, "\" alt=\"").concat(product.title, "\" />\n      <h3>").concat(product.title, "</h3>\n      <p>Category: ").concat(product.category, "</p>\n      <p>Price: $").concat(product.price, "</p>\n      <button onclick=\"addToCart(").concat(product.id, ")\">Add to Cart</button>\n\n    ");
         var addToCartButton = document.createElement("button");
         addToCartButton.textContent = "Add to Cart";
-        //  addToCartButton.addEventListener("click", () => addToCart(product.id));
+        addToCartButton.addEventListener("click", function () { return addToCart(product.id); });
         productDiv.addEventListener("click", function () { return displaySingleProduct(product); });
         productContainer.appendChild(productDiv);
     });
+}
+function addToCart(productId) {
+    console.log("Product with ID ".concat(productId, " added to the cart."));
 }
 function viewMore(description, rating, count) {
     var modal = document.createElement("div");
