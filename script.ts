@@ -44,8 +44,8 @@ function displaySingleProduct(product: Product): void {
       // Populating the product details
       const productTitleElements = document.querySelectorAll("#productTitle");
       productTitleElements.forEach((element) => {
-        element.innerText = product.title;
-         element.style.textDecoration = "none"; 
+        // element.innerText = product.title;
+        //  element.style.textDecoration = "none"; 
       });
 
       const productCategoryElement = document.getElementById("productCategory");
@@ -55,14 +55,14 @@ function displaySingleProduct(product: Product): void {
 
       const productPriceElements = document.querySelectorAll("#productPrice");
       productPriceElements.forEach((element) => {
-        element.innerText = `$${product.price}`;
+        // element.innerText = `$${product.price}`;
       });
 
       const productDescriptionElements = document.querySelectorAll(
         "#productDescription"
       );
       productDescriptionElements.forEach((element) => {
-        element.innerText = product.description;
+        // element.innerText = product.description;
       });
 
       const productRatingElement = document.getElementById("productRating");
@@ -100,7 +100,12 @@ function displayAllProducts(products: Product[]): void {
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
       <p>Price: $${product.price}</p>
+      // <button onclick="addToCart(${product.id})">Add to Cart</button>
+
     `;
+     const addToCartButton = document.createElement("button");
+     addToCartButton.textContent = "Add to Cart";
+    //  addToCartButton.addEventListener("click", () => addToCart(product.id));
 
     productDiv.addEventListener("click", () => displaySingleProduct(product));
 

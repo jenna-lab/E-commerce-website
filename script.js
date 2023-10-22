@@ -1,13 +1,61 @@
 var apiUrl = "https://fakestoreapi.com/products";
+// function displaySingleProduct(product: Product): void {
+//   const productContainer = document.getElementById("product-container");
+//   if (!productContainer) return;
+//   productContainer.innerHTML = "";
+//   const productDiv = document.createElement("div");
+//   productDiv.classList.add("product");
+//   productDiv.innerHTML = `
+//     <img src="${product.image}" alt="${product.title}" />
+//     <h3>${product.title}</h3>
+//     <p>Category: ${product.category}</p>
+//     <p>Price: $${product.price}</p>
+//     <p>Description: ${product.description}</p>
+//     <p>Rating: ${product.rating.rate} (${product.rating.count} reviews)</p>
+//   `;
+//   productContainer.appendChild(productDiv);
+// }
 function displaySingleProduct(product) {
     var productContainer = document.getElementById("product-container");
     if (!productContainer)
         return;
     productContainer.innerHTML = "";
-    var productDiv = document.createElement("div");
-    productDiv.classList.add("product");
-    productDiv.innerHTML = "\n    <img src=\"".concat(product.image, "\" alt=\"").concat(product.title, "\" />\n    <h3>").concat(product.title, "</h3>\n    <p>Category: ").concat(product.category, "</p>\n    <p>Price: $").concat(product.price, "</p>\n    <p>Description: ").concat(product.description, "</p>\n    <p>Rating: ").concat(product.rating.rate, " (").concat(product.rating.count, " reviews)</p>\n  ");
-    productContainer.appendChild(productDiv);
+    // Loading the product.html content
+    fetch("product.html")
+        .then(function (response) { return response.text(); })
+        .then(function (html) {
+        productContainer.innerHTML = html;
+        // Populating the product details
+        var productTitleElements = document.querySelectorAll("#productTitle");
+        productTitleElements.forEach(function (element) {
+            // element.innerText = product.title;
+            //  element.style.textDecoration = "none"; 
+        });
+        var productCategoryElement = document.getElementById("productCategory");
+        if (productCategoryElement) {
+            productCategoryElement.innerText = "Category: ".concat(product.category);
+        }
+        var productPriceElements = document.querySelectorAll("#productPrice");
+        productPriceElements.forEach(function (element) {
+            // element.innerText = `$${product.price}`;
+        });
+        var productDescriptionElements = document.querySelectorAll("#productDescription");
+        productDescriptionElements.forEach(function (element) {
+            // element.innerText = product.description;
+        });
+        var productRatingElement = document.getElementById("productRating");
+        if (productRatingElement) {
+            productRatingElement.innerText = "".concat(product.rating.rate, " (").concat(product.rating.count, " reviews)");
+        }
+        var productImageElements = document.querySelectorAll("#productImage");
+        productImageElements.forEach(function (element) {
+            element.setAttribute("src", product.image);
+            element.setAttribute("alt", product.title);
+        });
+    })
+        .catch(function (error) {
+        console.error("Error fetching product.html:", error);
+    });
 }
 function displayAllProducts(products) {
     var productContainer = document.getElementById("product-container");
@@ -21,7 +69,10 @@ function displayAllProducts(products) {
     products.forEach(function (product) {
         var productDiv = document.createElement("div");
         productDiv.classList.add("product");
-        productDiv.innerHTML = "\n      <img src=\"".concat(product.image, "\" alt=\"").concat(product.title, "\" />\n      <h3>").concat(product.title, "</h3>\n      <p>Category: ").concat(product.category, "</p>\n      <p>Price: $").concat(product.price, "</p>\n    ");
+        productDiv.innerHTML = "\n      <img src=\"".concat(product.image, "\" alt=\"").concat(product.title, "\" />\n      <h3>").concat(product.title, "</h3>\n      <p>Category: ").concat(product.category, "</p>\n      <p>Price: $").concat(product.price, "</p>\n      // <button onclick=\"addToCart(").concat(product.id, ")\">Add to Cart</button>\n\n    ");
+        var addToCartButton = document.createElement("button");
+        addToCartButton.textContent = "Add to Cart";
+        //  addToCartButton.addEventListener("click", () => addToCart(product.id));
         productDiv.addEventListener("click", function () { return displaySingleProduct(product); });
         productContainer.appendChild(productDiv);
     });
