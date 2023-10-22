@@ -98,17 +98,17 @@
   width: 300px;
   flex-grow: inherit;
   height: 400px;
-   /* display: flex; */
-  /* flex-direction: column; */
+  
 }
 
 .product img {
   width: 50%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  flex-grow: 1;
-  height: 200px; 
-  object-fit: cover; 
+  margin-left: 70px;
+   height: 200px;
+  object-fit: contain;
+ 
 }
 
 .product h3 {
@@ -124,6 +124,7 @@
 .button-container {
   display: flex;
   justify-content: space-between;
+  /* justify-content: center; */
   align-items: center;
   margin-top: 10px;
 }
@@ -146,39 +147,6 @@
 .product button:hover {
   background-color: #45a049;
 }
-.modal {
-  /* display: block; */
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 50%;
-  height: 100%;
-  overflow: auto;
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 
 @media only screen and (max-width: 700px) {
      .navs ul {
