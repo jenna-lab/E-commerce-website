@@ -22,11 +22,19 @@
 
           <div class="nav-ul">
             <ul>
-              <li><a href="home.html">Home</a></li>
-              <li><a href="groceries.html">Groceries</a></li>
-              <li><a href="electronics.html">Electronics</a></li>
-              <li><a href="clothing.html">Clothing</a></li>
+            <li><a href="javascript:void(0)" onclick="displayAllProducts()">Home</a></li>
+            <li><a href="javascript:void(0)" onclick="displayCategory('groceries')">Groceries</a></li>
+            <li><a href="javascript:void(0)" onclick="displayCategory('electronics')">Electronics</a></li>
+            <li><a href="javascript:void(0)" onclick="displayCategory('clothing')">Clothing</a></li>
             </ul>
+          </div>
+            <div class="cart-container" id="cart-container">
+            <img src="./images/icon-cart.svg" alt="Cart Icon" />
+            <!-- <h3>Cart</h3> -->
+            <!-- <ul id="cart-items"> -->
+            <!-- </ul> -->
+            <!-- <p id="cart-total">Total: $0</p> -->
+            <!-- <button onclick="clearCart()">Clear Cart</button> -->
           </div>
         </div>
       </div>
