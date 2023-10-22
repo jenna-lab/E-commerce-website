@@ -1,4 +1,25 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var apiUrl = "https://fakestoreapi.com/products";
+fetch(apiUrl)
+    .then(function (response) { return response.json(); })
+    .then(function (data) {
+    var categories = extractCategories(data);
+    displayCategory(categories, "");
+    displayAllProducts(data);
+})
+    .catch(function (error) {
+    console.error("Error fetching data:", error);
+});
 function displaySingleProduct(product) {
     var productContainer = document.getElementById("product-container");
     if (!productContainer)
@@ -50,32 +71,60 @@ function displayAllProducts(products) {
     products.forEach(function (product) {
         var productDiv = document.createElement("div");
         productDiv.classList.add("product");
-        productDiv.innerHTML = "\n      <img src=\"".concat(product.image, "\" alt=\"").concat(product.title, "\" />\n      <h3>").concat(product.title, "</h3>\n      <p>Category: ").concat(product.category, "</p>\n      <p>Price: $").concat(product.price, "</p>\n      <button onclick=\"addToCart(").concat(product.id, ")\">Add to Cart</button>\n\n    ");
+        var productImage = document.createElement("img");
+        productImage.src = product.image;
+        productImage.alt = product.title;
+        productImage.addEventListener("click", function () { return displaySingleProduct(product); });
+        var productTitle = document.createElement("h3");
+        productTitle.textContent = product.title;
+        var productCategory = document.createElement("p");
+        productCategory.textContent = "Category: ".concat(product.category);
+        var productPrice = document.createElement("p");
+        productPrice.textContent = "Price: $".concat(product.price);
         var addToCartButton = document.createElement("button");
         addToCartButton.textContent = "Add to Cart";
         addToCartButton.addEventListener("click", function () { return addToCart(product.id); });
-        productDiv.addEventListener("click", function () { return displaySingleProduct(product); });
+        productDiv.appendChild(productImage);
+        productDiv.appendChild(productTitle);
+        productDiv.appendChild(productCategory);
+        productDiv.appendChild(productPrice);
+        productDiv.appendChild(addToCartButton);
         productContainer.appendChild(productDiv);
     });
 }
-function addToCart(productId) {
-    console.log("Product with ID ".concat(productId, " added to the cart."));
-}
-function viewMore(description, rating, count) {
-    var modal = document.createElement("div");
-    modal.classList.add("modal");
-    var modalContent = document.createElement("div");
-    modalContent.classList.add("modal-content");
-    modalContent.innerHTML = "\n    <span class=\"close-button\" onclick=\"closeModal()\">&times;</span>\n    <p>Description: ".concat(description, "</p>\n    <p>Rating: ").concat(rating, " (").concat(count, " reviews)</p>\n  ");
-    modal.appendChild(modalContent);
-    document.body.appendChild(modal);
-}
-function closeModal() {
-    var modal = document.querySelector(".modal");
-    if (modal) {
-        modal.remove();
+var cartCountElement = document.getElementById("cart-count");
+var currentCart = JSON.parse(localStorage.getItem("cartItems") || "[]");
+var addToCart = function (product_id) {
+    console.log(product_id);
+    var CATEGORY_PRODUCT_API = "https://fakestoreapi.com/products/".concat(product_id);
+    fetch(CATEGORY_PRODUCT_API)
+        .then(function (response) { return response.json(); })
+        .then(function (json) {
+        var found = false;
+        for (var i = 0; i < currentCart.length; i++) {
+            if (currentCart[i].id === json.id) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            currentCart = currentCart.map(function (item) {
+                return item.id === json.id ? __assign(__assign({}, item), { count: (item.count || 1) + 1 }) : item;
+            });
+        }
+        else {
+            currentCart.push(__assign(__assign({}, json), { count: 1 }));
+        }
+        localStorage.setItem("cartItems", JSON.stringify(currentCart));
+        console.log("Updated cart items:", currentCart);
+        updateCartCount(currentCart.length);
+    });
+};
+var updateCartCount = function (count) {
+    if (cartCountElement) {
+        cartCountElement.innerText = count.toString();
     }
-}
+};
 var categories = [];
 function extractCategories(products) {
     var categories = [];
@@ -103,13 +152,3 @@ function displayCategory(categories, selectedCategory) {
         }
     }
 }
-fetch(apiUrl)
-    .then(function (response) { return response.json(); })
-    .then(function (data) {
-    var categories = extractCategories(data);
-    displayCategory(categories, ""); // Initially, no category is selected
-    displayAllProducts(data);
-})
-    .catch(function (error) {
-    console.error("Error fetching data:", error);
-});

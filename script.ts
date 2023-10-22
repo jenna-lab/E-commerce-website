@@ -1,5 +1,16 @@
 const apiUrl: string = "https://fakestoreapi.com/products";
 
+fetch(apiUrl)
+  .then((response: Response) => response.json())
+  .then((data: Product[]) => {
+    const categories = extractCategories(data);
+    displayCategory(categories, "");
+    displayAllProducts(data);
+  })
+  .catch((error: any) => {
+    console.error("Error fetching data:", error);
+  });
+
 interface Product {
   id: number;
   title: string;
@@ -8,7 +19,9 @@ interface Product {
   category: string;
   image: string;
   rating: { rate: number; count: number };
+  count?: number;
 }
+
 
 function displaySingleProduct(product: Product): void {
   const productContainer = document.getElementById("product-container");
@@ -73,51 +86,77 @@ function displayAllProducts(products: Product[]): void {
     const productDiv = document.createElement("div");
     productDiv.classList.add("product");
 
-    productDiv.innerHTML = `
-      <img src="${product.image}" alt="${product.title}" />
-      <h3>${product.title}</h3>
-      <p>Category: ${product.category}</p>
-      <p>Price: $${product.price}</p>
-      <button onclick="addToCart(${product.id})">Add to Cart</button>
+    const productImage = document.createElement("img");
+    productImage.src = product.image;
+    productImage.alt = product.title;
 
-    `;
-     const addToCartButton = document.createElement("button");
-     addToCartButton.textContent = "Add to Cart";
-     addToCartButton.addEventListener("click", () => addToCart(product.id));
+    productImage.addEventListener("click", () => displaySingleProduct(product));
 
-    productDiv.addEventListener("click", () => displaySingleProduct(product));
+    const productTitle = document.createElement("h3");
+    productTitle.textContent = product.title;
+
+    const productCategory = document.createElement("p");
+    productCategory.textContent = `Category: ${product.category}`;
+
+    const productPrice = document.createElement("p");
+    productPrice.textContent = `Price: $${product.price}`;
+
+    const addToCartButton = document.createElement("button");
+    addToCartButton.textContent = "Add to Cart";
+    addToCartButton.addEventListener("click", () => addToCart(product.id));
+
+    productDiv.appendChild(productImage);
+    productDiv.appendChild(productTitle);
+    productDiv.appendChild(productCategory);
+    productDiv.appendChild(productPrice);
+    productDiv.appendChild(addToCartButton);
 
     productContainer.appendChild(productDiv);
   });
 }
-function addToCart(productId: number): void {
-  console.log(`Product with ID ${productId} added to the cart.`);
-}
 
+const cartCountElement = document.getElementById("cart-count");
 
-function viewMore(description: string, rating: number, count: number): void {
-  const modal = document.createElement("div");
-  modal.classList.add("modal");
+let currentCart: Product[] = JSON.parse(localStorage.getItem("cartItems") || "[]");
 
-  const modalContent = document.createElement("div");
-  modalContent.classList.add("modal-content");
+const addToCart = (product_id: number) => {
+  console.log(product_id);
 
-  modalContent.innerHTML = `
-    <span class="close-button" onclick="closeModal()">&times;</span>
-    <p>Description: ${description}</p>
-    <p>Rating: ${rating} (${count} reviews)</p>
-  `;
+  const CATEGORY_PRODUCT_API = `https://fakestoreapi.com/products/${product_id}`;
 
-  modal.appendChild(modalContent);
-  document.body.appendChild(modal);
-}
+  fetch(CATEGORY_PRODUCT_API)
+    .then((response) => response.json())
+    .then((json: Product) => {
+      let found = false;
+      for (let i = 0; i < currentCart.length; i++) {
+        if (currentCart[i].id === json.id) {
+          found = true;
+          break;
+        }
+      }
 
-function closeModal() {
-  const modal = document.querySelector(".modal");
-  if (modal) {
-    modal.remove();
+      if (found) {
+        currentCart = currentCart.map((item) =>
+          item.id === json.id ? { ...item, count: (item.count || 1) + 1 } : item
+        );
+      } else {
+        currentCart.push({ ...json, count: 1 });
+      }
+
+      localStorage.setItem("cartItems", JSON.stringify(currentCart));
+
+      console.log("Updated cart items:", currentCart);
+      updateCartCount(currentCart.length);
+    });
+};
+
+const updateCartCount = (count: number) => {
+  if (cartCountElement) {
+    cartCountElement.innerText = count.toString();
   }
-}
+};
+
+
 let categories: string[] = [];
 
 
@@ -149,13 +188,3 @@ function displayCategory(categories: string[], selectedCategory: string): void {
   }
 }
 
-fetch(apiUrl)
-  .then((response: Response) => response.json())
-  .then((data: Product[]) => {
-    const categories = extractCategories(data);
-    displayCategory(categories, ""); // Initially, no category is selected
-    displayAllProducts(data);
-  })
-  .catch((error: any) => {
-    console.error("Error fetching data:", error);
-  });
