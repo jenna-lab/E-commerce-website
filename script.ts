@@ -1,16 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const apiUrl: string = "https://fakestoreapi.com/products";
 
-  fetch('apiUrl')
-    .then((response: Response) => response.json())
-    .then((data: Product[]) => {
-      const categories = extractCategories(data);
-      displayCategory(categories, "");
-      displayAllProducts(data);
-    })
-    .catch((error: any) => {
-      console.error("Error fetching data:", error);
-    });
 
   interface Product {
     id: number;
