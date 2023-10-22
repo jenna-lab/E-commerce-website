@@ -23,24 +23,22 @@
           <div class="nav-ul">
             <ul>
             <li><a href="javascript:void(0)" onclick="displayAllProducts()">Home</a></li>
-            <li><a href="javascript:void(0)" onclick="displayCategory('groceries')">Groceries</a></li>
-            <li><a href="javascript:void(0)" onclick="displayCategory('electronics')">Electronics</a></li>
-            <li><a href="javascript:void(0)" onclick="displayCategory('clothing')">Clothing</a></li>
+            <li><a href="javascript:void(0)" onclick="displayCategory('men clothing')">Men's</a></li>
+            <li><a href="javascript:void(0)" onclick="displayCategory('women clothing')">Women's</a></li>
+            <li><a href="javascript:void(0)" onclick="displayCategory('jewelley')">Jewellery</a></li>
             </ul>
           </div>
             <div class="cart-container" id="cart-container">
             <img src="./images/icon-cart.svg" alt="Cart Icon" />
-            <!-- <h3>Cart</h3> -->
-            <!-- <ul id="cart-items"> -->
-            <!-- </ul> -->
-            <!-- <p id="cart-total">Total: $0</p> -->
-            <!-- <button onclick="clearCart()">Clear Cart</button> -->
           </div>
         </div>
       </div>
 
-      <div class="product-container" id="product-container"></div>
+      <div class="product-container" id="product-container">
+       <object type="text/html" data="./product.html" width="100%" height="100%"></object>
+      </div>
+      
     </section>
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>

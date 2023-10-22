@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./product.css">
+    <title>Product Details</title>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="imgSide">
+                <img src="" alt="" id="productImage">
+            </div>
+            <div class="contentSide">
+                <div class="content">
+                    <h4 id="productTitle">Product Title</h4><br>
+                    <p id="productDescription">Product Description</p>
+                    </p><br>
+                    <div class="pricingBox">
+                        <div class="box1">
+                            <h3 id="productPrice">$XX.XX</h3>
+                        </div>
+                    </div>
+                    <div class="cart">
+                        <div class="cartAmount">
+                            <div class="minus">
+                                <button>-</button>
+                            </div>
+                            <div class="zero">
+                                <h4>0</h4>
+                            </div>
+                            <div class="plus">
+                                <button>+</button>
+                            </div>
+                        </div>
+                        <div class="cartBox">
+                            <img src="./images/icon-cart.svg" alt="">
+                            <h5>Add to cart</h5>
+                        </div>
+                    </div>
+                </div>
+                <ul>
+                    <h3 id="productTitle">Product Title</h3>
+                    <li id="productCategory">Category: Product Category</li>
+                    <li id="productPriceDetail">Price: $XX.XX</li>
+                    <li id="productDescriptionDetail">Description: Product Description</li>
+                    <li id="productRating">Rating: X.X (X reviews)</li>
+                    <button>Add to Cart</button>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const productDetails = {
+            title: "Product Title",
+            category: "Product Category",
+            price: "$XX.XX",
+            description: "Product Description",
+            rating: "X.X (X reviews)",
+            imageUrl: "path_to_product_image.jpg"
+        };
+
+        document.getElementById('productTitle').innerText = productDetails.title;
+        document.getElementById('productCategory').innerText = `Category: ${productDetails.category}`;
+        document.getElementById('productPrice').innerText = productDetails.price;
+        document.getElementById('productPriceDetail').innerText = `Price: ${productDetails.price}`;
+        document.getElementById('productDescription').innerText = productDetails.description;
+        document.getElementById('productDescriptionDetail').innerText = `Description: ${productDetails.description}`;
+        document.getElementById('productRating').innerText = `Rating: ${productDetails.rating}`;
+        document.getElementById('productImage').src = productDetails.imageUrl;
+    </script>
+</body>
+
+</html>
