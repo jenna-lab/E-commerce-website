@@ -1,0 +1,11 @@
+.cart-container{
+    border: solid 2px red;
+    width: 80%;
+    margin: 80px;
+    height: 80vh;
+}
+.heading{
+    font-weight: 700;
+    font-size: 24px;
+    margin-left: 50px;
+}

@@ -1,184 +1,245 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//   const apiUrl: string = "https://fakestoreapi.com/products";
+const apiUrl: string = "https://fakestoreapi.com/products";
 
+fetch(apiUrl)
+  .then((response: Response) => response.json())
+  .then((data: Product[]) => {
+    const categories = extractCategories(data);
+    // displayCategory(categories, "");
+    displayAllProducts();
+  })
+  .catch((error: any) => {
+    console.error("Error fetching data:", error);
+  });
 
-//   interface Product {
-//     id: number;
-//     title: string;
-//     price: number;
-//     description: string;
-//     category: string;
-//     image: string;
-//     rating: { rate: number; count: number };
-//     count?: number;
-//   }
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: { rate: number; count: number };
+  count?: number;
+}
 
-//   function displaySingleProduct(product: Product): void {
-//     const productContainer = document.getElementById("product-container");
-//     if (!productContainer) return;
+function displaySingleProduct(product: Product): void {
+  const productContainer = document.getElementById("product-container");
+  if (!productContainer) return;
 
-//     productContainer.innerHTML = "";
+  productContainer.innerHTML = "";
 
-//     fetch("product.html")
-//       .then((response) => response.text())
-//       .then((html) => {
-//         productContainer.innerHTML = html;
+  fetch("product.html")
+    .then((response) => response.text())
+    .then((html) => {
+      productContainer.innerHTML = html;
 
-//         const productTitleElements = document.querySelectorAll("#productTitle");
-//         productTitleElements.forEach((element) => {
-//           element.innerHTML = product.title;
-//         });
+      const productTitleElements = document.querySelectorAll("#productTitle");
+      productTitleElements.forEach((element) => {
+        element.innerHTML = product.title;
+      });
 
-//         const productCategoryElement =
-//           document.getElementById("productCategory");
-//         if (productCategoryElement) {
-//           productCategoryElement.innerHTML = `Category: ${product.category}`;
-//         }
+      const productCategoryElement = document.getElementById("productCategory");
+      if (productCategoryElement) {
+        productCategoryElement.innerHTML = `Category: ${product.category}`;
+      }
 
-//         const productPriceElements = document.querySelectorAll("#productPrice");
-//         productPriceElements.forEach((element) => {
-//           element.innerHTML = `$${product.price}`;
-//         });
+      const productPriceElements = document.querySelectorAll("#productPrice");
+      productPriceElements.forEach((element) => {
+        element.innerHTML = `$${product.price}`;
+      });
 
-//         const productDescriptionElements = document.querySelectorAll(
-//           "#productDescription"
-//         );
-//         productDescriptionElements.forEach((element) => {
-//           element.innerHTML = product.description;
-//         });
+      const productDescriptionElements = document.querySelectorAll(
+        "#productDescription"
+      );
+      productDescriptionElements.forEach((element) => {
+        element.innerHTML = product.description;
+      });
 
-//         const productRatingElement = document.getElementById("productRating");
-//         if (productRatingElement) {
-//           productRatingElement.innerText = `${product.rating.rate} (${product.rating.count} reviews)`;
-//         }
+      const productRatingElement = document.getElementById("productRating");
+      if (productRatingElement) {
+        productRatingElement.innerText = `${product.rating.rate} (${product.rating.count} reviews)`;
+      }
 
-//         const productImageElements = document.querySelectorAll("#productImage");
-//         productImageElements.forEach((element) => {
-//           element.setAttribute("src", product.image);
-//           element.setAttribute("alt", product.title);
-//         });
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching product.html:", error);
-//       });
-//   }
+      const productImageElements = document.querySelectorAll("#productImage");
+      productImageElements.forEach((element) => {
+        element.setAttribute("src", product.image);
+        element.setAttribute("alt", product.title);
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching product.html:", error);
+    });
+}
 
-//   function displayAllProducts(products: Product[]): void {
-//     const productContainer = document.getElementById("product-container");
-//     if (!productContainer) return;
+function displayAllProducts(): void {
+  var apiUrl = `https://fakestoreapi.com/products`;
+  fetch(apiUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      const products = data;
 
-//     productContainer.innerHTML = "";
-//     if (!products || products.length === 0) {
-//       productContainer.innerHTML = "No products to display.";
-//       return;
-//     }
+      console.log("products are ", products);
 
-//     products.forEach((product) => {
-//       const productDiv = document.createElement("div");
-//       productDiv.classList.add("product");
+      const productContainer = document.getElementById("product-container");
+      if (!productContainer) return;
 
-//       const productImage = document.createElement("img");
-//       productImage.src = product.image;
-//       productImage.alt = product.title;
+      productContainer.innerHTML = "";
+      if (!products || products.length === 0) {
+        productContainer.innerHTML = "No products to display.";
+        return;
+      }
 
-//       productImage.addEventListener("click", () =>
-//         displaySingleProduct(product)
-//       );
+      products.forEach((product: Product) => {
+        const productDiv = document.createElement("div");
+        productDiv.classList.add("product");
 
-//       const productTitle = document.createElement("h3");
-//       productTitle.textContent = product.title;
+        const productImage = document.createElement("img");
+        productImage.src = product.image;
+        productImage.alt = product.title;
 
-//       const productCategory = document.createElement("p");
-//       productCategory.textContent = `Category: ${product.category}`;
+        productImage.addEventListener("click", () =>
+          displaySingleProduct(product)
+        );
 
-//       const productPrice = document.createElement("p");
-//       productPrice.textContent = `Price: $${product.price}`;
+        const productTitle = document.createElement("h3");
+        productTitle.textContent = product.title;
 
-//       const addToCartButton = document.createElement("button");
-//       addToCartButton.textContent = "Add to Cart";
-//       addToCartButton.addEventListener("click", () => addToCart(product.id));
+        const productCategory = document.createElement("p");
+        productCategory.textContent = `Category: ${product.category}`;
 
-//       productDiv.appendChild(productImage);
-//       productDiv.appendChild(productTitle);
-//       productDiv.appendChild(productCategory);
-//       productDiv.appendChild(productPrice);
-//       productDiv.appendChild(addToCartButton);
+        const productPrice = document.createElement("p");
+        productPrice.textContent = `Price: $${product.price}`;
 
-//       productContainer.appendChild(productDiv);
-//     });
-//   }
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = "Add to Cart";
+        addToCartButton.addEventListener("click", () => addToCart(product.id));
 
-//   const cartCountElement = document.getElementById("cart-count");
+        productDiv.appendChild(productImage);
+        productDiv.appendChild(productTitle);
+        productDiv.appendChild(productCategory);
+        productDiv.appendChild(productPrice);
+        productDiv.appendChild(addToCartButton);
 
-//   let currentCart: Product[] = JSON.parse(
-//     localStorage.getItem("cartItems") || "[]"
-//   );
+        productContainer.appendChild(productDiv);
+      });
+    });
+}
 
-//   const addToCart = (product_id: number) => {
-//     console.log(product_id);
+const cartCountElement = document.getElementById("cart-count");
 
-//     const CATEGORY_PRODUCT_API = `https://fakestoreapi.com/products/${product_id}`;
+let currentCart: Product[] = JSON.parse(
+  localStorage.getItem("cartItems") || "[]"
+);
 
-//     fetch(CATEGORY_PRODUCT_API)
-//       .then((response) => response.json())
-//       .then((json: Product) => {
-//         let found = false;
-//         for (let i = 0; i < currentCart.length; i++) {
-//           if (currentCart[i].id === json.id) {
-//             found = true;
-//             break;
-//           }
-//         }
+const addToCart = (product_id: number) => {
+  console.log(product_id);
 
-//         if (found) {
-//           currentCart = currentCart.map((item) =>
-//             item.id === json.id
-//               ? { ...item, count: (item.count || 1) + 1 }
-//               : item
-//           );
-//         } else {
-//           currentCart.push({ ...json, count: 1 });
-//         }
+  const CATEGORY_PRODUCT_API = `https://fakestoreapi.com/products/${product_id}`;
 
-//         localStorage.setItem("cartItems", JSON.stringify(currentCart));
+  fetch(CATEGORY_PRODUCT_API)
+    .then((response) => response.json())
+    .then((json: Product) => {
+      let found = false;
+      for (let i = 0; i < currentCart.length; i++) {
+        if (currentCart[i].id === json.id) {
+          found = true;
+          break;
+        }
+      }
 
-//         console.log("Updated cart items:", currentCart);
-//         updateCartCount(currentCart.length);
-//       });
-//   };
+      if (found) {
+        currentCart = currentCart.map((item) =>
+          item.id === json.id ? { ...item, count: (item.count || 1) + 1 } : item
+        );
+      } else {
+        currentCart.push({ ...json, count: 1 });
+      }
 
-//   const updateCartCount = (count: number) => {
-//     if (cartCountElement) {
-//       cartCountElement.innerText = count.toString();
-//     }
-//   };
+      localStorage.setItem("cartItems", JSON.stringify(currentCart));
 
-//   let categories: string[] = [];
+      console.log("Updated cart items:", currentCart);
+      updateCartCount(currentCart.length);
+    });
+};
 
-//   function extractCategories(products: Product[]): string[] {
-//     const categories: string[] = [];
-//     products.forEach((product) => {
-//       if (categories.indexOf(product.category) === -1) {
-//         categories.push(product.category);
-//       }
-//     });
-//     return categories;
-//   }
+const updateCartCount = (count: number) => {
+  if (cartCountElement) {
+    cartCountElement.innerText = count.toString();
+  }
+};
 
-//   function displayCategory(category: string): void {
-//     fetch(apiUrl)
-//       .then((response: Response) => response.json())
-//       .then((data: Product[]) => {
-//         const filteredProducts = data.filter(
-//           (product) => product.category.toLowerCase() === category.toLowerCase()
-//         );
-//         displayAllProducts(filteredProducts);
-//       })
-//       .catch((error: any) => {
-//         console.error("Error fetching data:", error);
-//       });
-//   }
+let categories: string[] = [];
 
+function extractCategories(products: Product[]): string[] {
+  const categories: string[] = [];
+  products.forEach((product) => {
+    if (categories.indexOf(product.category) === -1) {
+      categories.push(product.category);
+    }
+  });
+  return categories;
+}
 
+function displayCategoryProducts(category: string) {
+  var apiUrl = `https://fakestoreapi.com/products/category/${category}`;
+  fetch(apiUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      const products = data;
+      console.log("products are ", products);
+      var productContainer = document.getElementById("product-container");
+      if (!productContainer) return;
+      productContainer.innerHTML = "";
+      if (!products || products.length === 0) {
+        productContainer.innerHTML = "No products to display.";
+        return;
+      }
+      products.forEach(function (product: Product) {
+        var productDiv = document.createElement("div");
+        productDiv.classList.add("product");
+        var productImage = document.createElement("img");
+        productImage.src = product.image;
+        productImage.alt = product.title;
+        productImage.addEventListener("click", function () {
+          return displaySingleProduct(product);
+        });
+        var productTitle = document.createElement("h3");
+        productTitle.textContent = product.title;
+        var productCategory = document.createElement("p");
+        productCategory.textContent = "Category: ".concat(product.category);
+        var productPrice = document.createElement("p");
+        productPrice.textContent = `Price: $"${product.price}`;
+        var addToCartButton = document.createElement("button");
+        addToCartButton.textContent = "Add to Cart";
+        addToCartButton.addEventListener("click", function () {
+          return addToCart(product.id);
+        });
+        productDiv.appendChild(productImage);
+        productDiv.appendChild(productTitle);
+        productDiv.appendChild(productCategory);
+        productDiv.appendChild(productPrice);
+        productDiv.appendChild(addToCartButton);
+        if (productContainer) {
+          productContainer.appendChild(productDiv);
+        }
+      });
+    });
+}
 
-// });
+function displayCategory(category: string): void {
+  fetch(apiUrl)
+    .then((response: Response) => response.json())
+    .then((data: Product[]) => {
+      const filteredProducts = data.filter(
+        (product) => product.category.toLowerCase() === category.toLowerCase()
+      );
+      displayAllProducts();
+    })
+    .catch((error: any) => {
+      console.error("Error fetching data:", error);
+    });
+}
