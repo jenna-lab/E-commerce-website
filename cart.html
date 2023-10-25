@@ -1,60 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="cart.css" />
-    <title>Cart</title>
-  </head>
-  <body>
-    <div class="cart-container" id="cart-items-container">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="cart.css" />
+  <title>Cart</title>
+</head>
+
+<body>
+  <div class="cart">
+    <div class="cart-container" >
       <div class="heading">
-        <h2 class="">Shopping Cart</h2>
+        <h2 class="header">Shopping Cart</h2>
+
       </div>
       <div class="cart-items">
-        <div>
-          <table>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-        </tr>
-        <tr>
-            <td>
-                <img src="./images/Screenshot 2023-10-14 161555.png" alt="" />
-                 <div class="cart-item-details">
-                    <p>Men's Fluffy Jacket</p>
+        <div class="table">
+          <table class="my-table">
+            <tr class="cart-row">
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+            <!-- <tr class="cart-row-data">
+              <td style="width: 55%;">
+                <div class="image-description">
+                  <img src="./images/Screenshot 2023-10-14 161555.png" alt="" />
+                  <div class="cart-item-details">
+                    <p>title></p>
                     <p>Price: $99.99</p>
-                </div>                
-                <button id="remove-button">Remove</button>
-            </td>
-            <td>
-                <div class="cart-item-buttons">
-                    <button id="minus-button">-</button>
-                    <input type="text" id="quantity-input" value="1" />
-                    <button id="plus-button">+</button>
-                                          <div class="separator"></div>
+                    <button id="remove-button">Remove</button>
 
                   </div>
-            </td>
-            <td class="cart-item-price">$99.99</td>
-        </tr>
-    </table>
+                </div>
+              </td>
+              <td>
+                <div class="cart-item-buttons">
+                  <button id="minus-button">-</button>
+                  <input type="text" id="quantity-input" value="1" />
+                  <button id="plus-button">+</button>
+
+                </div>
+              </td>
+              <td class="cart-item-price">$99.99</td>
+            </tr> -->
+
+          </table>
         </div>
       </div>
 
       <div class="checkout">
-                <div class="separator"></div>
-
-        <div>
-          <h3>Total</h3>
-          <h4>Price</h4>
+        <div class="checkout-list">
+          <div>Total</div>
+          <div>Price</div>
         </div>
-
         <div>
           <button id="checkout-button">Checkout</button>
         </div>
+
       </div>
     </div>
-  </body>
+</body>
+<script src="script.js"></script>
+
 </html>

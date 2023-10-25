@@ -124,7 +124,6 @@
 .button-container {
   display: flex;
   justify-content: space-between;
-  /* justify-content: center; */
   align-items: center;
   margin-top: 10px;
 }
@@ -133,7 +132,7 @@
   background-color: orange;
   border: none;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 90px;
   text-align: center;
   text-decoration: none;
   display: inline-block;

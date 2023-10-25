@@ -205,3 +205,57 @@ function displayCategory(category) {
         console.error("Error fetching data:", error);
     });
 }
+var displayCart = function () {
+    var productContainer = document.getElementById("product-container");
+    var cartContainer = document.getElementById("cart-container");
+    if (productContainer && cartContainer) {
+        fetch("./cart.html")
+            .then(function (response) { return response.text(); })
+            .then(function (html) {
+            productContainer.innerHTML = html;
+        })
+            .catch(function (error) {
+            console.error("Error fetching cart.html:", error);
+        });
+    }
+};
+var cartContainer = document.getElementById("cart-container");
+if (cartContainer) {
+    cartContainer.addEventListener("click", displayCart);
+}
+var my_table = document.querySelector(".my-table");
+my_table.style.border = "5px solid red";
+var my_cart = localStorage.getItem("cartItems") || "[]";
+var cartItems = JSON.parse(my_cart);
+cartItems.forEach(function (element) {
+    // console.log(element);
+    var tr = document.createElement("tr");
+    var td = document.createElement("td");
+    var img = document.createElement("img");
+    img.setAttribute("src", element.image);
+    img.setAttribute("alt", element.title);
+    td.appendChild(img);
+    tr.appendChild(td);
+    // console.log(img)
+    var tdTitle = document.createElement("td");
+    var titleText = document.createTextNode(element.title);
+    tdTitle.appendChild(titleText);
+    tr.appendChild(tdTitle);
+    // console.log(tdTitle);
+    var tdPrice = document.createElement("td");
+    var priceText = document.createTextNode("$".concat(element.price));
+    tdPrice.appendChild(priceText);
+    tr.appendChild(tdPrice);
+    console.log(tdPrice);
+    if (my_table) {
+        my_table.appendChild(tr);
+        console.log(my_table);
+    }
+    else {
+        console.log("my_table is not defined");
+    }
+});
+if (my_table) {
+    console.log(my_table);
+}
+console.log("cart items i sof type ", typeof cartItems);
