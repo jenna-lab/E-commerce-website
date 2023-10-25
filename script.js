@@ -224,7 +224,6 @@ if (cartContainer) {
     cartContainer.addEventListener("click", displayCart);
 }
 var my_table = document.querySelector(".my-table");
-my_table.style.border = "5px solid red";
 var my_cart = localStorage.getItem("cartItems") || "[]";
 var cartItems = JSON.parse(my_cart);
 cartItems.forEach(function (element) {
@@ -241,12 +240,17 @@ cartItems.forEach(function (element) {
     var titleText = document.createTextNode(element.title);
     tdTitle.appendChild(titleText);
     tr.appendChild(tdTitle);
+    var tdQuantity = document.createElement("td");
+    var quantityText = document.createTextNode("".concat(element.quantity));
+    tdQuantity.appendChild(quantityText);
+    tr.appendChild(tdQuantity);
+    console.log(tdQuantity);
     // console.log(tdTitle);
     var tdPrice = document.createElement("td");
     var priceText = document.createTextNode("$".concat(element.price));
     tdPrice.appendChild(priceText);
     tr.appendChild(tdPrice);
-    console.log(tdPrice);
+    // console.log(tdPrice);
     if (my_table) {
         my_table.appendChild(tr);
         console.log(my_table);
@@ -256,6 +260,6 @@ cartItems.forEach(function (element) {
     }
 });
 if (my_table) {
-    console.log(my_table);
+    // console.log(my_table);
 }
-console.log("cart items i sof type ", typeof cartItems);
+// console.log("cart items i sof type ", typeof cartItems);

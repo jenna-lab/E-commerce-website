@@ -20,6 +20,7 @@ interface Product {
   image: string;
   rating: { rate: number; count: number };
   count?: number;
+  quantity: number;
 }
 
 function displaySingleProduct(product: Product): void {
@@ -264,7 +265,6 @@ if (cartContainer) {
   cartContainer.addEventListener("click", displayCart);
 }
 const my_table = document.querySelector(".my-table") as HTMLTableElement;
-my_table.style.border = "5px solid red";
 const my_cart = localStorage.getItem("cartItems") || "[]";
 const cartItems: Product[] = JSON.parse(my_cart);
 
@@ -286,13 +286,21 @@ cartItems.forEach((element: Product) => {
   tdTitle.appendChild(titleText);
   tr.appendChild(tdTitle);
 
+  //  const tdQuantity = document.createElement("td");
+  //  const quantityText = document.createTextNode(`${element.quantity}`);
+  //  tdQuantity.appendChild(quantityText);
+  //  tr.appendChild(tdQuantity);
+  //  console.log(tdQuantity);
+
   // console.log(tdTitle);
   const tdPrice = document.createElement("td");
   const priceText = document.createTextNode(`$${element.price}`);
   tdPrice.appendChild(priceText);
   tr.appendChild(tdPrice);
 
-  console.log(tdPrice);
+ 
+
+  // console.log(tdPrice);
 
   if (my_table) {
     my_table.appendChild(tr);
@@ -303,7 +311,7 @@ cartItems.forEach((element: Product) => {
 });
 
 if (my_table) {
-  console.log(my_table);
+  // console.log(my_table);
 }
 
-console.log("cart items i sof type ", typeof cartItems);
+// console.log("cart items i sof type ", typeof cartItems);
