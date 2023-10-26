@@ -268,66 +268,61 @@ const my_table = document.querySelector("tbody") as HTMLElement;
 const my_cart = localStorage.getItem("cartItems") || "[]";
 const cartItems: Product[] = JSON.parse(my_cart);
 
+const checkoutList = document.querySelector(
+  ".check-out-list"
+) as HTMLDivElement;
+const totalElement = document.createElement("div");
+totalElement.textContent = "Total: $";
+
+let totalPrice = 0;
+
 cartItems.forEach((element: Product) => {
   // console.log();
 
   const tr = document.createElement("tr");
-  const tdProduct = document.createElement("td")
+  const tdProduct = document.createElement("td");
 
-  // const td = document.createElement("td");
-  // const img = document.createElement("img") as HTMLImageElement;
-  // img.setAttribute("src", element.image);
-  // img.setAttribute("alt", element.title);
-   const divImage = document.createElement("div");
-   const productImage = document.createElement("img");
-   productImage.src = element.image;
-   productImage.alt = element.title;
-   divImage.appendChild(productImage);
+  const divImage = document.createElement("div");
+  const productImage = document.createElement("img");
+  productImage.src = element.image;
+  productImage.alt = element.title;
+  divImage.appendChild(productImage);
 
-  // console.log(img)
-  // const tdTitle = document.createElement("td");
-  // const titleText = document.createTextNode(element.title);
-  // td.appendChild(titleText);
-  // td.appendChild(img);
-  // tr.appendChild(td);
-  
   const divTitle = document.createElement("div");
   const titleText = document.createTextNode(element.title);
+
+  const removeButton = document.createElement("button");
+  removeButton.textContent = "Remove";
+
   divTitle.appendChild(titleText);
 
- tdProduct.appendChild(divImage);
- tdProduct.appendChild(divTitle);
- 
- const tdRemove = document.createElement("td");
- const removeButton = document.createElement("button");
- removeButton.textContent = "Remove";
- removeButton.addEventListener("click", () => {
-   // const index = cartItems.findIndex((item) => item.id === element.id);
-   const index = cartItems.indexOf(element);
-   if (index > -1) {
-     cartItems.splice(index, 1);
-     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-     tr.remove();
-   }
- });
+  tdProduct.appendChild(divImage);
+  tdProduct.appendChild(divTitle);
+  tdProduct.appendChild(removeButton);
 
- tdRemove.appendChild(removeButton);
- tr.appendChild(tdRemove);
+  removeButton.addEventListener("click", () => {
+    // const index = cartItems.findIndex((item) => item.id === element.id);
+    const index = cartItems.indexOf(element);
+    if (index > -1) {
+      cartItems.splice(index, 1);
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      tr.remove();
+    }
+  });
 
   tr.appendChild(tdProduct);
 
+  const tdQty = document.createElement("td");
 
-const tdQty = document.createElement("td");
-
- const minusButton = document.createElement("button");
- minusButton.innerText = "-";
- minusButton.addEventListener("click", () => {
-   if (element.count > 0) {
-     element.count--;
-     qtyText.nodeValue = `${element.count}`;
-     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-   }
- });
+  const minusButton = document.createElement("button");
+  minusButton.innerText = "-";
+  minusButton.addEventListener("click", () => {
+    if (element.count > 0) {
+      element.count--;
+      qtyText.nodeValue = `${element.count}`;
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
+  });
 
   const qtyText = document.createTextNode(`${element.count}`);
   tdQty.appendChild(minusButton);
@@ -348,21 +343,16 @@ const tdQty = document.createElement("td");
   const priceText = document.createTextNode(`$${element.price}`);
   tdPrice.appendChild(priceText);
   tr.appendChild(tdPrice);
-   
+
   my_table.appendChild(tr);
+
+  totalPrice += element.price * element.count;
+  console.log(totalPrice);
+
   // console.log(my_table);
 });
 
-//  const tdRemove = document.createElement("td");
-//  const removeButton = document.createElement("button");
-//  removeButton.textContent = "Remove";
-//  removeButton.addEventListener("click", () => {
-//    const index = cartItems.findIndex((item) => item.id === element.id);
-//    if (index > -1) {
-//      cartItems.splice(index, 1);
-//      localStorage.setItem("cartItems", JSON.stringify(cartItems));
-//      tr.remove();
-//    }
-//  });
-//  tdRemove.appendChild(removeButton);
-//  tr.appendChild(tdRemove);
+// const priceElement = document.createElement("div");
+// priceElement.textContent = `$${totalPrice}`;
+checkoutList.appendChild(totalElement);
+// checkoutList.appendChild(priceElement);

@@ -1,65 +1,64 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.section{
-    width: 100vw;
-    height: 100vh;
-    background-color: hsl(0, 0%, 100%);
-    font-family: 'Outfit', sans-serif;
+.section {
+  width: 100vw;
+  height: 100vh;
+  background-color: hsl(0, 0%, 100%);
+  font-family: "Outfit", sans-serif;
 }
 
-.navbar{
-    padding: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 10%;
-    background-color: orange;
+.navbar {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  background-color: orange;
 }
 
-.navs{
-    display: flex;
-    width: 50%;
-    height: 100%;
-    align-items: center;
-    justify-content: flex-start; 
-} 
+.navs {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+}
 
 .header {
-    display: flex;
-    justify-content: space-around;
-    font-size: 24px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 24px;
 }
 
-.navs h3{
-    color: hsl(0, 0%, 0%);
-    font-weight: 900;
+.navs h3 {
+  color: hsl(0, 0%, 0%);
+  font-weight: 900;
 }
 
-.nav-ul{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.nav-ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.nav-ul li{
-    padding-left: 70px;
+.nav-ul li {
+  padding-left: 70px;
 }
-.navbar ul{
-    margin-left: 100px;
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-    font-size: 20px;
+.navbar ul {
+  margin-left: 100px;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  font-size: 20px;
 }
 
 .navbar a {
-    text-decoration: none; 
-    color: black; 
+  text-decoration: none;
+  color: black;
 }
 
 .cart-container {
@@ -75,8 +74,8 @@
 }
 
 .cart-container img {
-  width: 40px; 
-  height: 40px; 
+  width: 40px;
+  height: 40px;
   margin-right: 20px;
 }
 
@@ -100,7 +99,6 @@
   width: 300px;
   flex-grow: inherit;
   height: 400px;
-  
 }
 
 .product img {
@@ -108,9 +106,8 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   margin-left: 70px;
-   height: 200px;
+  height: 200px;
   object-fit: contain;
- 
 }
 
 .product h3 {
@@ -120,7 +117,7 @@
 
 .product p {
   margin: 5px 0;
-   flex-grow: 1;
+  flex-grow: 1;
 }
 
 .button-container {
@@ -159,10 +156,7 @@
 }
 
 @media only screen and (max-width: 700px) {
-     .navs ul {
-        display: none; 
-    }
-
-
-  
+  .navs ul {
+    display: none;
+  }
 }

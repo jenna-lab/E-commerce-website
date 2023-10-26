@@ -1,90 +1,87 @@
-
-.section{
-    width: 100%;
-    height: 80vh;
+.section {
+  width: 100%;
+  height: 80vh;
 }
-        .container {
-            display: flex;
-            width: 90%;
-            height: 80vh;
-            /* border: 1px solid red; */
-            border-radius: 10px;
-        }
-
-        .imgSide {
-            flex: 1;
-            padding-top: 40px;
-            padding-left: 60px;
-        }
-
-        .imgSide img {
-            width: 70%;
-            height: 50vh;
-        }
-
-        .contentSide {
-            display: flex;
-            flex: 1;
-            padding: 100px;
-        }
-
-        .content h4 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .content p {
-            margin-bottom: 10px;
-        }
-
-        .pricingBox {
-            margin-bottom: 20px;
-        }
-
-        .pricingBox h3 {
-            color: #ff6600;
-            font-size: 28px;
-            margin: 0;
-        }
-
-     
-.cart{
-    width: 90%;
-    height: 20%;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-}
-.cartBox{
-    width: 50%;
-    height: 60%;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: hsl(26, 100%, 55%);
+.container {
+  display: flex;
+  width: 90%;
+  height: 80vh;
+  /* border: 1px solid red; */
+  border-radius: 10px;
 }
 
-
-.cartAmount{
-    width: 35%;
-    height: 40%;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: hsl(223, 64%, 98%);
+.imgSide {
+  flex: 1;
+  padding-top: 40px;
+  padding-left: 60px;
 }
 
-.cartAmount button{
-    border: none;
-    color: hsl(26, 100%, 55%);
-    background: none;
-    font-size: 40px;
+.imgSide img {
+  width: 70%;
+  height: 50vh;
 }
 
-    .cartBox img {
-            width: 20px;
-            height: auto;
-            margin-right: 10px;
-        }
+.contentSide {
+  display: flex;
+  flex: 1;
+  padding: 100px;
+}
+
+.content h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.content p {
+  margin-bottom: 10px;
+}
+
+.pricingBox {
+  margin-bottom: 20px;
+}
+
+.pricingBox h3 {
+  color: #ff6600;
+  font-size: 28px;
+  margin: 0;
+}
+
+.cart {
+  width: 90%;
+  height: 20%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.cartBox {
+  width: 50%;
+  height: 60%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: hsl(26, 100%, 55%);
+}
+
+.cartAmount {
+  width: 35%;
+  height: 40%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: hsl(223, 64%, 98%);
+}
+
+.cartAmount button {
+  border: none;
+  color: hsl(26, 100%, 55%);
+  background: none;
+  font-size: 40px;
+}
+
+.cartBox img {
+  width: 20px;
+  height: auto;
+  margin-right: 10px;
+}
