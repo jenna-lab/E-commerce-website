@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-        box-sizing: border-box;
+    box-sizing: border-box;
 
 }
 
@@ -147,6 +147,15 @@
 
 .product button:hover {
   background-color: #45a049;
+}
+#cart-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 50%;
 }
 
 @media only screen and (max-width: 700px) {

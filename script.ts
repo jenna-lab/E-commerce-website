@@ -272,32 +272,97 @@ cartItems.forEach((element: Product) => {
   // console.log();
 
   const tr = document.createElement("tr");
+  const tdProduct = document.createElement("td")
 
-  const td = document.createElement("td");
-  const img = document.createElement("img") as HTMLImageElement;
-  img.setAttribute("src", element.image);
-  img.setAttribute("alt", element.title);
+  // const td = document.createElement("td");
+  // const img = document.createElement("img") as HTMLImageElement;
+  // img.setAttribute("src", element.image);
+  // img.setAttribute("alt", element.title);
+   const divImage = document.createElement("div");
+   const productImage = document.createElement("img");
+   productImage.src = element.image;
+   productImage.alt = element.title;
+   divImage.appendChild(productImage);
 
   // console.log(img)
-  const tdTitle = document.createElement("td");
+  // const tdTitle = document.createElement("td");
+  // const titleText = document.createTextNode(element.title);
+  // td.appendChild(titleText);
+  // td.appendChild(img);
+  // tr.appendChild(td);
+  
+  const divTitle = document.createElement("div");
   const titleText = document.createTextNode(element.title);
-  td.appendChild(titleText);
-  td.appendChild(img);
+  divTitle.appendChild(titleText);
 
-  // tr.appendChild(tdTitle);
+ tdProduct.appendChild(divImage);
+ tdProduct.appendChild(divTitle);
+ 
+ const tdRemove = document.createElement("td");
+ const removeButton = document.createElement("button");
+ removeButton.textContent = "Remove";
+ removeButton.addEventListener("click", () => {
+   // const index = cartItems.findIndex((item) => item.id === element.id);
+   const index = cartItems.indexOf(element);
+   if (index > -1) {
+     cartItems.splice(index, 1);
+     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+     tr.remove();
+   }
+ });
 
-  tr.appendChild(td);
+ tdRemove.appendChild(removeButton);
+ tr.appendChild(tdRemove);
 
-  const tdQty = document.createElement("td");
+  tr.appendChild(tdProduct);
+
+
+const tdQty = document.createElement("td");
+
+ const minusButton = document.createElement("button");
+ minusButton.innerText = "-";
+ minusButton.addEventListener("click", () => {
+   if (element.count > 0) {
+     element.count--;
+     qtyText.nodeValue = `${element.count}`;
+     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+   }
+ });
+
   const qtyText = document.createTextNode(`${element.count}`);
+  tdQty.appendChild(minusButton);
   tdQty.appendChild(qtyText);
+
+  const plusButton = document.createElement("button");
+  plusButton.textContent = "+";
+  plusButton.addEventListener("click", () => {
+    element.count++;
+    qtyText.nodeValue = `${element.count}`;
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  });
+  tdQty.appendChild(plusButton);
+
   tr.appendChild(tdQty);
 
   const tdPrice = document.createElement("td");
   const priceText = document.createTextNode(`$${element.price}`);
   tdPrice.appendChild(priceText);
   tr.appendChild(tdPrice);
-
+   
   my_table.appendChild(tr);
-  console.log(my_table);
+  // console.log(my_table);
 });
+
+//  const tdRemove = document.createElement("td");
+//  const removeButton = document.createElement("button");
+//  removeButton.textContent = "Remove";
+//  removeButton.addEventListener("click", () => {
+//    const index = cartItems.findIndex((item) => item.id === element.id);
+//    if (index > -1) {
+//      cartItems.splice(index, 1);
+//      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+//      tr.remove();
+//    }
+//  });
+//  tdRemove.appendChild(removeButton);
+//  tr.appendChild(tdRemove);

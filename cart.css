@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .cart{
   width: 100%;
 }
@@ -135,8 +140,8 @@ table {
   text-decoration: none;
 }
 
-.my-table >tbody >tr > td > img{
-  /* border: 1px solid red; */
+.my-table >tbody >tr > td > div >img{
+  border: 1px solid red;
   height: 75px;
   width: 75px;
 }
@@ -144,4 +149,54 @@ table {
   border: 1px solid red;
   /* text-align: center; */
   align-items: center;
+}
+.navbar{
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    /* height: 10%; */
+    background-color: orange;
+}
+
+.navs{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start; 
+} 
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    font-size: 24px;
+}
+
+.navs h3{
+    color: hsl(0, 0%, 0%);
+    font-weight: 900;
+}
+
+.nav-ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.nav-ul li{
+    padding-left: 70px;
+}
+.navbar ul{
+    margin-left: 100px;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    font-size: 20px;
+}
+
+.navbar a {
+    text-decoration: none; 
+    color: black; 
 }

@@ -230,25 +230,81 @@ var cartItems = JSON.parse(my_cart);
 cartItems.forEach(function (element) {
     // console.log();
     var tr = document.createElement("tr");
-    var td = document.createElement("td");
-    var img = document.createElement("img");
-    img.setAttribute("src", element.image);
-    img.setAttribute("alt", element.title);
+    var tdProduct = document.createElement("td");
+    // const td = document.createElement("td");
+    // const img = document.createElement("img") as HTMLImageElement;
+    // img.setAttribute("src", element.image);
+    // img.setAttribute("alt", element.title);
+    var divImage = document.createElement("div");
+    var productImage = document.createElement("img");
+    productImage.src = element.image;
+    productImage.alt = element.title;
+    divImage.appendChild(productImage);
     // console.log(img)
-    var tdTitle = document.createElement("td");
+    // const tdTitle = document.createElement("td");
+    // const titleText = document.createTextNode(element.title);
+    // td.appendChild(titleText);
+    // td.appendChild(img);
+    // tr.appendChild(td);
+    var divTitle = document.createElement("div");
     var titleText = document.createTextNode(element.title);
-    td.appendChild(titleText);
-    td.appendChild(img);
-    // tr.appendChild(tdTitle);
-    tr.appendChild(td);
+    divTitle.appendChild(titleText);
+    tdProduct.appendChild(divImage);
+    tdProduct.appendChild(divTitle);
+    var tdRemove = document.createElement("td");
+    var removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", function () {
+        // const index = cartItems.findIndex((item) => item.id === element.id);
+        var index = cartItems.indexOf(element);
+        if (index > -1) {
+            cartItems.splice(index, 1);
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            tr.remove();
+        }
+    });
+    tdRemove.appendChild(removeButton);
+    tr.appendChild(tdRemove);
+    tr.appendChild(tdProduct);
     var tdQty = document.createElement("td");
+    var minusButton = document.createElement("button");
+    minusButton.innerText = "-";
+    minusButton.addEventListener("click", function () {
+        if (element.count > 0) {
+            element.count--;
+            qtyText.nodeValue = "".concat(element.count);
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+    });
     var qtyText = document.createTextNode("".concat(element.count));
+    tdQty.appendChild(minusButton);
     tdQty.appendChild(qtyText);
+    var plusButton = document.createElement("button");
+    plusButton.textContent = "+";
+    plusButton.addEventListener("click", function () {
+        element.count++;
+        qtyText.nodeValue = "".concat(element.count);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    });
+    tdQty.appendChild(plusButton);
     tr.appendChild(tdQty);
     var tdPrice = document.createElement("td");
     var priceText = document.createTextNode("$".concat(element.price));
     tdPrice.appendChild(priceText);
     tr.appendChild(tdPrice);
     my_table.appendChild(tr);
-    console.log(my_table);
+    // console.log(my_table);
 });
+//  const tdRemove = document.createElement("td");
+//  const removeButton = document.createElement("button");
+//  removeButton.textContent = "Remove";
+//  removeButton.addEventListener("click", () => {
+//    const index = cartItems.findIndex((item) => item.id === element.id);
+//    if (index > -1) {
+//      cartItems.splice(index, 1);
+//      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+//      tr.remove();
+//    }
+//  });
+//  tdRemove.appendChild(removeButton);
+//  tr.appendChild(tdRemove);
