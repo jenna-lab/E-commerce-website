@@ -1,5 +1,17 @@
 const apiUrl: string = "https://fakestoreapi.com/products";
 
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: { rate: number; count: number };
+  count: number;
+  quantity: number;
+}
+
 fetch(apiUrl)
   .then((response: Response) => response.json())
   .then((data: Product[]) => {
@@ -10,18 +22,6 @@ fetch(apiUrl)
   .catch((error: any) => {
     console.error("Error fetching data:", error);
   });
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: { rate: number; count: number };
-  count?: number;
-  quantity: number;
-}
 
 function displaySingleProduct(product: Product): void {
   const productContainer = document.getElementById("product-container");
@@ -72,6 +72,10 @@ function displaySingleProduct(product: Product): void {
     });
 }
 
+let currentCart: Product[] = JSON.parse(
+  localStorage.getItem("cartItems") || "[]"
+);
+
 function displayAllProducts(): void {
   var apiUrl = `https://fakestoreapi.com/products`;
   fetch(apiUrl)
@@ -91,7 +95,7 @@ function displayAllProducts(): void {
         productContainer.innerHTML = "No products to display.";
         return;
       }
-
+      updateCartCount(currentCart.length);
       products.forEach((product: Product) => {
         const productDiv = document.createElement("div");
         productDiv.classList.add("product");
@@ -129,10 +133,6 @@ function displayAllProducts(): void {
 }
 
 const cartCountElement = document.getElementById("cart-count");
-
-let currentCart: Product[] = JSON.parse(
-  localStorage.getItem("cartItems") || "[]"
-);
 
 const addToCart = (product_id: number) => {
   console.log(product_id);
@@ -264,12 +264,12 @@ const cartContainer = document.getElementById("cart-container") as HTMLElement;
 if (cartContainer) {
   cartContainer.addEventListener("click", displayCart);
 }
-const my_table = document.querySelector(".my-table") as HTMLTableElement;
+const my_table = document.querySelector("tbody") as HTMLElement;
 const my_cart = localStorage.getItem("cartItems") || "[]";
 const cartItems: Product[] = JSON.parse(my_cart);
 
 cartItems.forEach((element: Product) => {
-  // console.log(element);
+  // console.log();
 
   const tr = document.createElement("tr");
 
@@ -277,41 +277,27 @@ cartItems.forEach((element: Product) => {
   const img = document.createElement("img") as HTMLImageElement;
   img.setAttribute("src", element.image);
   img.setAttribute("alt", element.title);
-  td.appendChild(img);
-  tr.appendChild(td);
 
   // console.log(img)
   const tdTitle = document.createElement("td");
   const titleText = document.createTextNode(element.title);
-  tdTitle.appendChild(titleText);
-  tr.appendChild(tdTitle);
+  td.appendChild(titleText);
+  td.appendChild(img);
 
-  //  const tdQuantity = document.createElement("td");
-  //  const quantityText = document.createTextNode(`${element.quantity}`);
-  //  tdQuantity.appendChild(quantityText);
-  //  tr.appendChild(tdQuantity);
-  //  console.log(tdQuantity);
+  // tr.appendChild(tdTitle);
 
-  // console.log(tdTitle);
+  tr.appendChild(td);
+
+  const tdQty = document.createElement("td");
+  const qtyText = document.createTextNode(`${element.count}`);
+  tdQty.appendChild(qtyText);
+  tr.appendChild(tdQty);
+
   const tdPrice = document.createElement("td");
   const priceText = document.createTextNode(`$${element.price}`);
   tdPrice.appendChild(priceText);
   tr.appendChild(tdPrice);
 
- 
-
-  // console.log(tdPrice);
-
-  if (my_table) {
-    my_table.appendChild(tr);
-    console.log(my_table);
-  } else {
-    console.log("my_table is not defined");
-  }
+  my_table.appendChild(tr);
+  console.log(my_table);
 });
-
-if (my_table) {
-  // console.log(my_table);
-}
-
-// console.log("cart items i sof type ", typeof cartItems);

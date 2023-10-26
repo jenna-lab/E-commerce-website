@@ -59,6 +59,7 @@ function displaySingleProduct(product) {
         console.error("Error fetching product.html:", error);
     });
 }
+var currentCart = JSON.parse(localStorage.getItem("cartItems") || "[]");
 function displayAllProducts() {
     var apiUrl = "https://fakestoreapi.com/products";
     fetch(apiUrl)
@@ -76,6 +77,7 @@ function displayAllProducts() {
             productContainer.innerHTML = "No products to display.";
             return;
         }
+        updateCartCount(currentCart.length);
         products.forEach(function (product) {
             var productDiv = document.createElement("div");
             productDiv.classList.add("product");
@@ -104,7 +106,6 @@ function displayAllProducts() {
     });
 }
 var cartCountElement = document.getElementById("cart-count");
-var currentCart = JSON.parse(localStorage.getItem("cartItems") || "[]");
 var addToCart = function (product_id) {
     console.log(product_id);
     var CATEGORY_PRODUCT_API = "https://fakestoreapi.com/products/".concat(product_id);
@@ -223,43 +224,31 @@ var cartContainer = document.getElementById("cart-container");
 if (cartContainer) {
     cartContainer.addEventListener("click", displayCart);
 }
-var my_table = document.querySelector(".my-table");
+var my_table = document.querySelector("tbody");
 var my_cart = localStorage.getItem("cartItems") || "[]";
 var cartItems = JSON.parse(my_cart);
 cartItems.forEach(function (element) {
-    // console.log(element);
+    // console.log();
     var tr = document.createElement("tr");
     var td = document.createElement("td");
     var img = document.createElement("img");
     img.setAttribute("src", element.image);
     img.setAttribute("alt", element.title);
-    td.appendChild(img);
-    tr.appendChild(td);
     // console.log(img)
     var tdTitle = document.createElement("td");
     var titleText = document.createTextNode(element.title);
-    tdTitle.appendChild(titleText);
-    tr.appendChild(tdTitle);
-    var tdQuantity = document.createElement("td");
-    var quantityText = document.createTextNode("".concat(element.quantity));
-    tdQuantity.appendChild(quantityText);
-    tr.appendChild(tdQuantity);
-    console.log(tdQuantity);
-    // console.log(tdTitle);
+    td.appendChild(titleText);
+    td.appendChild(img);
+    // tr.appendChild(tdTitle);
+    tr.appendChild(td);
+    var tdQty = document.createElement("td");
+    var qtyText = document.createTextNode("".concat(element.count));
+    tdQty.appendChild(qtyText);
+    tr.appendChild(tdQty);
     var tdPrice = document.createElement("td");
     var priceText = document.createTextNode("$".concat(element.price));
     tdPrice.appendChild(priceText);
     tr.appendChild(tdPrice);
-    // console.log(tdPrice);
-    if (my_table) {
-        my_table.appendChild(tr);
-        console.log(my_table);
-    }
-    else {
-        console.log("my_table is not defined");
-    }
+    my_table.appendChild(tr);
+    console.log(my_table);
 });
-if (my_table) {
-    // console.log(my_table);
-}
-// console.log("cart items i sof type ", typeof cartItems);

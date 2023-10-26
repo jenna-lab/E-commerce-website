@@ -92,6 +92,8 @@
 
 .product {
   border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
