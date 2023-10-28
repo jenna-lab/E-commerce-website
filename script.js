@@ -276,12 +276,11 @@ cartItems.forEach(function (element) {
     });
     tdQty.appendChild(plusButton);
     tr.appendChild(tdQty);
+    var tdPrice = document.createElement("td");
+    var priceText = document.createTextNode("$".concat(element.price));
+    tdPrice.appendChild(priceText);
+    tr.appendChild(tdPrice);
     totalPrice += element.price * element.count;
+    console.log(totalPrice);
     my_table.appendChild(tr);
-    //  console.log(totalPrice);
 });
-var totalPriceText = document.createTextNode("Total: $".concat(totalPrice));
-var totalPriceElement = document.getElementById("total");
-if (totalPriceElement) {
-    totalPriceElement.appendChild(totalPriceText);
-}
