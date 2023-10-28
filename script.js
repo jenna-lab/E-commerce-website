@@ -262,17 +262,28 @@ cartItems.forEach(function (element) {
             element.count--;
             qtyText.nodeValue = "".concat(element.count);
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            totalPrice += element.price;
+            updateTotalPrice();
         }
     });
     var qtyText = document.createTextNode("".concat(element.count));
     tdQty.appendChild(minusButton);
     tdQty.appendChild(qtyText);
+    totalPrice += element.price * element.count;
+    var updateTotalPrice = function () {
+        var totalElement = document.querySelector(".total-number");
+        if (totalElement) {
+            totalElement.innerText = "$".concat(totalPrice.toFixed(2));
+        }
+    };
     var plusButton = document.createElement("button");
     plusButton.textContent = "+";
     plusButton.addEventListener("click", function () {
         element.count++;
         qtyText.nodeValue = "".concat(element.count);
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        totalPrice += element.price;
+        updateTotalPrice();
     });
     tdQty.appendChild(plusButton);
     tr.appendChild(tdQty);
@@ -283,4 +294,5 @@ cartItems.forEach(function (element) {
     totalPrice += element.price * element.count;
     console.log(totalPrice);
     my_table.appendChild(tr);
+    updateTotalPrice();
 });

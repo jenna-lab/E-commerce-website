@@ -313,6 +313,8 @@ cartItems.forEach((element: Product) => {
       element.count--;
       qtyText.nodeValue = `${element.count}`;
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        totalPrice += element.price;
+        updateTotalPrice();
     }
   });
 
@@ -320,12 +322,25 @@ cartItems.forEach((element: Product) => {
   tdQty.appendChild(minusButton);
   tdQty.appendChild(qtyText);
 
+   totalPrice += element.price * element.count;
+
+   const updateTotalPrice = () => {
+     const totalElement = document.querySelector(
+       ".total-number"
+     ) as HTMLElement;
+     if (totalElement) {
+       totalElement.innerText = `$${totalPrice.toFixed(2)}`;
+     }
+   };
+
   const plusButton = document.createElement("button");
   plusButton.textContent = "+";
   plusButton.addEventListener("click", () => {
     element.count++;
     qtyText.nodeValue = `${element.count}`;
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    totalPrice += element.price; 
+    updateTotalPrice();
   });
   tdQty.appendChild(plusButton);
 
@@ -340,5 +355,5 @@ cartItems.forEach((element: Product) => {
  console.log(totalPrice);
 
   my_table.appendChild(tr);
-
+    updateTotalPrice();
 });
