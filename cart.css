@@ -89,15 +89,13 @@ img {
   position: absolute;
   padding-top: 0;
   right: 5px;
-  bottom: 62px;
-  flex-wrap: wrap;
+  bottom: 60px;
 }
 .checkout-table {
   width: 100%;
   margin-top: 0px;
   margin-left: auto;
   bottom: -50px;
-  flex-wrap: wrap;
 }
 
 .checkout-table td {
