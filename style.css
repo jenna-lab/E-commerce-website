@@ -71,6 +71,7 @@
   border: 1px solid #000;
   border-radius: 5px;
   background-color: #f9f9f9;
+  border: none;
 }
 
 .cart-container img {

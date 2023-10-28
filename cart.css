@@ -15,6 +15,7 @@
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
+  border: none;
 }
 
 .heading {
@@ -89,8 +90,30 @@ img {
   flex-wrap: wrap;
 }
 
+.total-price {
+  /* text-align: center;
+  font-size: 1.5rem;
+  margin: 20px 0; */
+}
+.checkout{
+  width: 60%;
+  /* flex-basis: 10%; */
+}
+.checkout-table {
+  border: red 2px solid;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0px;
+  margin-left: auto; /* Move the table to the right */
+}
+
+.checkout-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
 #checkout-button {
-  padding: 10px 100px;
   font-size: 16px;
   background-color: orange;
   color: white;
@@ -104,13 +127,6 @@ img {
   background-color: #45a049;
 }
 
-.checkout {
-  margin-top: 20px;
-  border: 2px solid orange;
-}
-
-.checkout-list {
-}
 
 #checkout-button {
   margin-top: 20px;
