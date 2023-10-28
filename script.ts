@@ -331,18 +331,22 @@ cartItems.forEach((element: Product) => {
 
   tr.appendChild(tdQty);
 
-  const tdPrice = document.createElement("td");
-  const priceText = document.createTextNode(`$${element.price}`);
-  tdPrice.appendChild(priceText);
-  tr.appendChild(tdPrice);
+  
+
+ totalPrice += element.price * element.count;
 
   my_table.appendChild(tr);
+//  console.log(totalPrice);
 
-  totalPrice += element.price * element.count;
-  console.log(totalPrice);
 
-  const totalSection = document.querySelector(".total-price") as HTMLDivElement;
-  if (totalSection) {
-    totalSection.textContent = `Total: $${totalPrice.toFixed(2)}`;
-  }
 });
+
+const totalPriceText = document.createTextNode(`Total: $${totalPrice}`);
+const totalPriceElement = document.getElementById("total") as HTMLElement;
+if (totalPriceElement) {
+  totalPriceElement.appendChild(totalPriceText);
+}
+
+
+
+

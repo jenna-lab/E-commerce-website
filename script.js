@@ -9,7 +9,6 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-// document.addEventListener("DOMContentLoaded", function () {
 var apiUrl = "https://fakestoreapi.com/products";
 fetch(apiUrl)
     .then(function (response) { return response.json(); })
@@ -96,9 +95,7 @@ function displayAllProducts() {
             productPrice.textContent = "Price: $".concat(product.price);
             var addToCartButton = document.createElement("button");
             addToCartButton.textContent = "Add to Cart";
-            addToCartButton.addEventListener("click", function () {
-                return addToCart(product.id);
-            });
+            addToCartButton.addEventListener("click", function () { return addToCart(product.id); });
             productDiv.appendChild(productImage);
             productDiv.appendChild(productTitle);
             productDiv.appendChild(productCategory);
@@ -124,8 +121,7 @@ var addToCart = function (product_id) {
         }
         if (found) {
             currentCart = currentCart.map(function (item) {
-                return item.id === json.id
-                    ? __assign(__assign({}, item), { count: (item.count || 1) + 1 }) : item;
+                return item.id === json.id ? __assign(__assign({}, item), { count: (item.count || 1) + 1 }) : item;
             });
         }
         else {
@@ -231,14 +227,8 @@ if (cartContainer) {
 var my_table = document.querySelector("tbody");
 var my_cart = localStorage.getItem("cartItems") || "[]";
 var cartItems = JSON.parse(my_cart);
-// const checkoutList = document.querySelector(
-//   ".check-out"
-// ) as HTMLDivElement;
-// const totalElement = document.createElement("div");
-// totalElement.textContent = "Total: $";
 var totalPrice = 0;
 cartItems.forEach(function (element) {
-    // console.log();
     var tr = document.createElement("tr");
     var tdProduct = document.createElement("td");
     var divImage = document.createElement("div");
@@ -286,16 +276,12 @@ cartItems.forEach(function (element) {
     });
     tdQty.appendChild(plusButton);
     tr.appendChild(tdQty);
-    var tdPrice = document.createElement("td");
-    var priceText = document.createTextNode("$".concat(element.price));
-    tdPrice.appendChild(priceText);
-    tr.appendChild(tdPrice);
-    my_table.appendChild(tr);
     totalPrice += element.price * element.count;
-    console.log(totalPrice);
-    var totalSection = document.querySelector(".total-price");
-    if (totalSection) {
-        totalSection.textContent = "Total: $".concat(totalPrice.toFixed(2));
-    }
+    my_table.appendChild(tr);
+    //  console.log(totalPrice);
 });
-// });
+var totalPriceText = document.createTextNode("Total: $".concat(totalPrice));
+var totalPriceElement = document.getElementById("total");
+if (totalPriceElement) {
+    totalPriceElement.appendChild(totalPriceText);
+}
