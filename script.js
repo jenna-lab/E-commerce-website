@@ -258,11 +258,11 @@ cartItems.forEach(function (element) {
     var minusButton = document.createElement("button");
     minusButton.innerText = "-";
     minusButton.addEventListener("click", function () {
-        if (element.count > 0) {
+        if (element.count > 1) {
             element.count--;
             qtyText.nodeValue = "".concat(element.count);
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            totalPrice += element.price;
+            totalPrice -= element.price;
             updateTotalPrice();
         }
     });
@@ -296,3 +296,28 @@ cartItems.forEach(function (element) {
     my_table.appendChild(tr);
     updateTotalPrice();
 });
+// ... (your previous code)
+// Open the modal
+var openModal = function () {
+    var modal = document.getElementById("myModal");
+    if (modal) {
+        modal.style.display = "block";
+    }
+};
+// Close the modal
+var closeModal = function () {
+    var modal = document.getElementById("myModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+};
+// Event listener for the checkout button
+var checkoutButton = document.getElementById("checkout-button");
+if (checkoutButton) {
+    checkoutButton.addEventListener("click", openModal);
+}
+// Event listener for the close button
+var closeButton = document.getElementById("closeModal");
+if (closeButton) {
+    closeButton.addEventListener("click", closeModal);
+}

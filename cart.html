@@ -68,18 +68,24 @@
         </div>
           
       </div>
-    
+    <div class="checkout">
+      <table class="checkout-table">
+        <tr>
+          <td class="total">Total:</td>
+          <td class="total-number">$100.00</td>
+        </tr>
+        <tr>
+          <td><button id="checkout-button">Checkout</button></td>
+        </tr>
+      </table>
+    </div>
        </div>
-        <div class="checkout">
-          <table class="checkout-table">
-            <tr>
-              <td class="total">Total:</td>
-              <td class="total-number">$100.00</td>
-            </tr>
-            <tr>
-              <td><button id="checkout-button">Checkout</button></td>
-            </tr>
-          </table>
+       
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <p>Your order has been placed successfully. Please check your email.</p>
+          </div>
         </div>
       <script src="script.js"></script>
 
