@@ -16,7 +16,6 @@ fetch(apiUrl)
   .then((response: Response) => response.json())
   .then((data: Product[]) => {
     const categories = extractCategories(data);
-    // displayCategory(categories, "");
     displayAllProducts();
   })
   .catch((error: any) => {
@@ -84,9 +83,6 @@ function displayAllProducts(): void {
     })
     .then(function (data) {
       const products = data;
-
-      console.log("products are ", products);
-
       const productContainer = document.getElementById("product-container");
       if (!productContainer) return;
 
@@ -273,7 +269,6 @@ let totalPrice = 0;
 cartItems.forEach((element: Product) => {
   const tr = document.createElement("tr");
   const tdProduct = document.createElement("td");
-
   const divImage = document.createElement("div");
   const productImage = document.createElement("img");
   productImage.src = element.image;
@@ -292,8 +287,14 @@ cartItems.forEach((element: Product) => {
   tdProduct.appendChild(divTitle);
   tdProduct.appendChild(removeButton);
 
+  removeButton.style.fontSize = "16px";
+  removeButton.style.padding = "8px 12px";
+  removeButton.style.color = "white";
+  removeButton.style.backgroundColor = "red";
+  removeButton.style.border = "none";
+  removeButton.style.borderRadius = "5px";
+
   removeButton.addEventListener("click", () => {
-    // const index = cartItems.findIndex((item) => item.id === element.id);
     const index = cartItems.indexOf(element);
     if (index > -1) {
       cartItems.splice(index, 1);
@@ -308,12 +309,17 @@ cartItems.forEach((element: Product) => {
 
   const minusButton = document.createElement("button");
   minusButton.innerText = "-";
+
+   minusButton.style.fontSize = "20px";
+   minusButton.style.padding = "8px 12px";
+   minusButton.style.margin = "0 10px";
+
   minusButton.addEventListener("click", () => {
     if (element.count > 1) {
       element.count--;
       qtyText.nodeValue = `${element.count}`;
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      totalPrice -= element.price; 
+      totalPrice -= element.price;
       updateTotalPrice();
     }
   });
@@ -322,62 +328,65 @@ cartItems.forEach((element: Product) => {
   tdQty.appendChild(minusButton);
   tdQty.appendChild(qtyText);
 
-   totalPrice += element.price * element.count;
+  totalPrice += element.price * element.count;
 
-   const updateTotalPrice = () => {
-     const totalElement = document.querySelector(
-       ".total-number"
-     ) as HTMLElement;
-     if (totalElement) {
-       totalElement.innerText = `$${totalPrice.toFixed(2)}`;
-     }
-   };
+  const updateTotalPrice = () => {
+    const totalElement = document.querySelector(".total-number") as HTMLElement;
+    if (totalElement) {
+      totalElement.innerText = `$${totalPrice.toFixed(2)}`;
+    }
+  };
 
   const plusButton = document.createElement("button");
   plusButton.textContent = "+";
+
+  plusButton.style.fontSize = "20px";
+  plusButton.style.padding = "8px 12px";
+  plusButton.style.margin = "0 10px";
+
   plusButton.addEventListener("click", () => {
     element.count++;
     qtyText.nodeValue = `${element.count}`;
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    totalPrice += element.price; 
+    totalPrice += element.price;
     updateTotalPrice();
   });
-  tdQty.appendChild(plusButton);
 
+  tdQty.appendChild(plusButton);
   tr.appendChild(tdQty);
+  
 
   const tdPrice = document.createElement("td");
   const priceText = document.createTextNode(`$${element.price}`);
   tdPrice.appendChild(priceText);
   tr.appendChild(tdPrice);
 
- totalPrice += element.price * element.count;
- console.log(totalPrice);
+  totalPrice += element.price * element.count;
 
   my_table.appendChild(tr);
-    updateTotalPrice();
+  updateTotalPrice();
 });
 
 const openModal = () => {
-    const modal = document.getElementById("myModal");
-    if (modal) {
-        modal.style.display = "block";
-    }
+  const modal = document.getElementById("myModal");
+  if (modal) {
+    modal.style.display = "block";
+  }
 };
 
 const closeModal = () => {
-    const modal = document.getElementById("myModal");
-    if (modal) {
-        modal.style.display = "none";
-    }
+  const modal = document.getElementById("myModal");
+  if (modal) {
+    modal.style.display = "none";
+  }
 };
 
 const checkoutButton = document.getElementById("checkout-button");
 if (checkoutButton) {
-    checkoutButton.addEventListener("click", openModal);
+  checkoutButton.addEventListener("click", openModal);
 }
 
 const closeButton = document.getElementById("closeModal");
 if (closeButton) {
-    closeButton.addEventListener("click", closeModal);
+  closeButton.addEventListener("click", closeModal);
 }

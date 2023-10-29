@@ -63,19 +63,10 @@ tr {
   font-size: 16px;
 }
 
-#remove-button {
-  background-color: white;
-  color: red;
-}
 img {
   float: left;
 }
 
-#remove-button,
-#minus-button,
-#plus-button {
-  padding: 5px 10px;
-}
 .cart-item-details {
   margin-bottom: 10px;
 }
@@ -89,13 +80,12 @@ img {
   position: absolute;
   padding-top: 0;
   right: 5px;
-  bottom: 60px;
+  bottom: 40px;
 }
 .checkout-table {
   width: 100%;
   margin-top: 0px;
   margin-left: auto;
-  bottom: -50px;
 }
 .total {
   font-weight: bold;
@@ -106,6 +96,7 @@ img {
 }
 
 .checkout-table td {
+  flex-wrap: wrap;
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
@@ -119,26 +110,19 @@ img {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+    margin-top: 20px;
 }
 
-#checkout-button:hover {
-  background-color: #45a049;
-}
-
-#checkout-button {
-  margin-top: 20px;
-}
 .cart-item-details a {
   text-decoration: none;
 }
 
 .my-table > tbody > tr > td > div > img {
-  border: 1px solid red;
   height: 75px;
   width: 75px;
 }
 .my-table > tbody > tr > td {
-  border: 1px solid red;
+  border: 1px solid orange;
   text-align: center;
   align-items: center;
 }
@@ -228,7 +212,6 @@ img {
     cursor: pointer;
 }
 
-/* Style the button */
 #checkout-button {
     background-color: #4CAF50;
     color: white;
@@ -262,6 +245,16 @@ img {
 }
 .navbar{
   width: 100%;
+}
+
+.checkout {
+ position: static;
+
+}
+.checkout-table {
+  width: 100%;
+  margin-top: 0px;
+  margin-left: auto;
 }
 
 }

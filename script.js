@@ -14,7 +14,6 @@ fetch(apiUrl)
     .then(function (response) { return response.json(); })
     .then(function (data) {
     var categories = extractCategories(data);
-    // displayCategory(categories, "");
     displayAllProducts();
 })
     .catch(function (error) {
@@ -68,7 +67,6 @@ function displayAllProducts() {
     })
         .then(function (data) {
         var products = data;
-        console.log("products are ", products);
         var productContainer = document.getElementById("product-container");
         if (!productContainer)
             return;
@@ -244,8 +242,13 @@ cartItems.forEach(function (element) {
     tdProduct.appendChild(divImage);
     tdProduct.appendChild(divTitle);
     tdProduct.appendChild(removeButton);
+    removeButton.style.fontSize = "16px";
+    removeButton.style.padding = "8px 12px";
+    removeButton.style.color = "white";
+    removeButton.style.backgroundColor = "red";
+    removeButton.style.border = "none";
+    removeButton.style.borderRadius = "5px";
     removeButton.addEventListener("click", function () {
-        // const index = cartItems.findIndex((item) => item.id === element.id);
         var index = cartItems.indexOf(element);
         if (index > -1) {
             cartItems.splice(index, 1);
@@ -257,6 +260,9 @@ cartItems.forEach(function (element) {
     var tdQty = document.createElement("td");
     var minusButton = document.createElement("button");
     minusButton.innerText = "-";
+    minusButton.style.fontSize = "20px";
+    minusButton.style.padding = "8px 12px";
+    minusButton.style.margin = "0 10px";
     minusButton.addEventListener("click", function () {
         if (element.count > 1) {
             element.count--;
@@ -278,6 +284,9 @@ cartItems.forEach(function (element) {
     };
     var plusButton = document.createElement("button");
     plusButton.textContent = "+";
+    plusButton.style.fontSize = "20px";
+    plusButton.style.padding = "8px 12px";
+    plusButton.style.margin = "0 10px";
     plusButton.addEventListener("click", function () {
         element.count++;
         qtyText.nodeValue = "".concat(element.count);
@@ -292,31 +301,25 @@ cartItems.forEach(function (element) {
     tdPrice.appendChild(priceText);
     tr.appendChild(tdPrice);
     totalPrice += element.price * element.count;
-    console.log(totalPrice);
     my_table.appendChild(tr);
     updateTotalPrice();
 });
-// ... (your previous code)
-// Open the modal
 var openModal = function () {
     var modal = document.getElementById("myModal");
     if (modal) {
         modal.style.display = "block";
     }
 };
-// Close the modal
 var closeModal = function () {
     var modal = document.getElementById("myModal");
     if (modal) {
         modal.style.display = "none";
     }
 };
-// Event listener for the checkout button
 var checkoutButton = document.getElementById("checkout-button");
 if (checkoutButton) {
     checkoutButton.addEventListener("click", openModal);
 }
-// Event listener for the close button
 var closeButton = document.getElementById("closeModal");
 if (closeButton) {
     closeButton.addEventListener("click", closeModal);

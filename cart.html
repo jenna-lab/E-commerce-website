@@ -6,6 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="cart.css" />
   <title>Cart</title>
+    <script>
+      function toggleNav() {
+        var navList = document.getElementById("navList");
+        if (navList.style.display === "flex") {
+          navList.style.display = "none";
+        } else {
+          navList.style.display = "flex";
+        }
+      }
+    </script>
 </head>
 
 <body>
@@ -25,6 +35,7 @@
         </ul>
       </div>
     </div>
+        <div class="toggle" onclick="toggleNav()">&#9776;</div>
   </div>
 
   <div class="cart">
@@ -87,7 +98,9 @@
             <p>Your order has been placed successfully. Please check your email.</p>
           </div>
         </div>
-      <script src="script.js"></script>
+      <script src="script.js">
+      
+      </script>
 
 </body>
 
