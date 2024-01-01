@@ -1,14 +1,16 @@
-#  E-commerce 
- Using the Fake Store API (https://fakestoreapi.com/docs), HTML, CSS and TypeScript build an e-commerce site to display products fetched from the provided API
+# FakeStore Shopping Website
+## Overview
+- This is a simple shopping website built with TypeScript, HTML, and CSS. 
+- It leverages the FakeStore API to display a variety of products, allows users to view individual product details, and manage a shopping cart.
 
-### The challenge
+## Features
+- Product Display: Fetches product data from the FakeStore API and dynamically displays them on the website.
 
-Users should be able to:
+- Product Details: Clicking on a product reveals detailed information, including the title, category, price, description, image, and rating.
 
-- Expected features include showing all products onloading the site.
-- Displaying products from a specific category
-- Displaying a specific product when the user clicks on the product and - but not limited to – implementing the cart where a user can add quantity of a specific item or remove it from the cart or clear the cart all together. 
-- The cart should calculate the Grand Total of the items.
+- Shopping Cart: Allows users to add products to the shopping cart, updating the cart count in real-time. Users can also remove items from the cart.
+
+- LocalStorage: Utilizes localStorage to persist the shopping cart data, ensuring that the cart state persists across page reloads.
 
 ### Screenshot
 
@@ -18,14 +20,7 @@ Users should be able to:
 ### Links
 - Live Site URL:(https://jenna-lab.github.io/E-commerce-website/)
 
-
-### Built with
-
-- TypeScript
-- HTML
-- CSS
-
-
-
 ## Author
 JENNIFER SAMMY
+
+
